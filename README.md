@@ -305,12 +305,6 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/emilio-kariuki/dev_grid/discussions)
 - 📚 **Documentation**: [API Documentation](https://pub.dev/documentation/dev_grid/latest/)
 
-## Related Packages
-
-- [flutter_grid_button](https://pub.dev/packages/flutter_grid_button) - Grid-based button layouts
-- [flutter_staggered_grid_view](https://pub.dev/packages/flutter_staggered_grid_view) - Staggered grid layouts
-- [responsive_builder](https://pub.dev/packages/responsive_builder) - Responsive UI building
-
 ---
 
 Made with ❤️ by [Emilio Kariuki](https://github.com/emilio-kariuki)
