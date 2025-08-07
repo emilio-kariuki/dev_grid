@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  dev_grid: ^0.0.1
+  dev_grid: ^0.0.2
 ```
 
 Then run:
