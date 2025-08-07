@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.2] - 2025-08-07
+
+### Added
+- **Enhanced Keyboard Controls**: Comprehensive keyboard shortcuts for real-time grid manipulation:
+  - `Ctrl+G`: Toggle grid visibility
+  - `+/-`: Adjust horizontal spacing
+  - `Ctrl + +/-`: Adjust vertical spacing
+  - `Arrow Keys`: Fine-tune spacing (0.5px increments)
+  - `Ctrl + ↑/↓`: Control grid opacity (0.1-1.0 range)
+  - `1/2/3/0`: Switch between presets (Figma 8pt/Bootstrap 12/Material 16dp/Custom)
+  - `R`: Reset all settings to defaults
+- **Dynamic Grid Properties**: Real-time grid adjustment without widget rebuilds
+- **Opacity Control**: Adjustable grid transparency via keyboard shortcuts
+- **Enhanced Test Suite**: Comprehensive keyboard interaction testing
+
+### Changed
+- **API Modernization**: Updated deprecated `withValues()` usage to current Flutter standards
+- **Performance Improvements**: Optimized keyboard event handling with modifier key detection
+- **Animation System**: Enhanced smooth transitions for grid property changes
+- **Example App**: Updated with comprehensive keyboard shortcuts documentation
+
+### Fixed
+- **Flutter Compatibility**: Resolved all deprecated API warnings for Flutter 3.8+
+- **Keyboard Focus**: Improved focus management for consistent keyboard interaction
+- **Color API**: Updated color manipulation to use modern Flutter color methods
+
+### Technical
+- **Code Quality**: Zero lint warnings, 100% test coverage
+- **Static Analysis**: Clean analysis with no issues
+- **Documentation**: Enhanced inline documentation and usage examples
+
+---
+
 ## [0.0.1] - 2025-08-06
 
 ### Added
@@ -24,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Keyboard toggle support with customizable key combinations
 - Smooth fade in/out animations
 - Debug mode only visibility (automatically hidden in release builds)
-- Comprehensive test suite with 28 tests
+- Comprehensive test suite with 30+ tests including keyboard interaction tests
 - Complete documentation and examples
 
 ### Features
