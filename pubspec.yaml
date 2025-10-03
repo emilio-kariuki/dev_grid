@@ -1,6 +1,6 @@
 name: dev_grid
 description: "A new Flutter package for overlaying Figma-like guides for development purposes."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/emilio-kariuki/dev_grid.git
 
 environment:

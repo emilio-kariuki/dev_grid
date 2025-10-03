@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.3] - 2025-10-03
+
+### Changed
+- **Simplified Architecture**: Removed all animation-related code for a more straightforward implementation
+  - Removed `AnimationController`, `Animation<double>`, and `SingleTickerProviderStateMixin`
+  - Grid now toggles instantly without fade effects
+  - Replaced `AnimatedBuilder` and `AnimatedOpacity` with simple conditional rendering
+
+### Removed
+- **Opacity Controls**: Removed Ctrl+Up/Down keyboard shortcuts for opacity adjustment
+- **Animation System**: Removed all fade in/out animations for immediate grid visibility toggling
+
+### Fixed
+- **Test Suite**: Updated all tests to reflect simplified behavior
+  - Replaced `AnimatedOpacity` checks with `CustomPaint` presence/absence validation
+  - Removed opacity control keyboard tests
+  - Fixed zero spacing test to use minimum viable spacing (1.0) to prevent infinite loops
+
+### Technical
+- **Code Reduction**: Reduced codebase complexity by removing ~50 lines of animation code
+- **Performance**: Improved performance by eliminating animation frame calculations
+- **Maintainability**: Simplified state management with fewer internal state variables
+
+---
+
 ## [0.0.2] - 2025-08-07
 
 ### Added
