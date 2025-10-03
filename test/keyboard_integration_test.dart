@@ -108,19 +108,6 @@ void main() {
       await tester.pumpAndSettle();
       await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowRight);
 
-      // Test opacity controls (Ctrl + Arrow Up/Down)
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowUp);
-      await tester.pumpAndSettle();
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowUp);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pumpAndSettle();
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowDown);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-
       // Test preset switching (1, 2, 3, 0 keys)
       await tester.sendKeyDownEvent(LogicalKeyboardKey.digit1);
       await tester.pumpAndSettle();

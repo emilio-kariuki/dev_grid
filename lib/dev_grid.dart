@@ -74,16 +74,13 @@ class DevGrid extends StatefulWidget {
 
 enum GridPreset { figma8pt, bootstrap12, material16 }
 
-class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
+class DevGridState extends State<DevGrid> {
   late bool _showGuides;
-  late AnimationController _animationController;
-  late Animation<double> _opacityAnimation;
   late FocusNode _focusNode;
-  
+
   // Dynamic grid properties that can be controlled via keyboard
   late double _currentHorizontalSpacing;
   late double _currentVerticalSpacing;
-  late double _currentOpacity;
   late GridPreset? _currentPreset;
   late Color _currentLineColor;
 
@@ -93,24 +90,13 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
     _showGuides = widget.debugOnly
         ? kDebugMode && widget.showGuides
         : widget.showGuides;
-    
+
     // Initialize dynamic properties
     _currentHorizontalSpacing = widget.horizontalSpacing;
     _currentVerticalSpacing = widget.verticalSpacing;
-    _currentOpacity = 1.0;
     _currentPreset = widget.preset;
     _currentLineColor = widget.lineColor;
-    
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _opacityAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(_animationController);
-    if (_showGuides) _animationController.forward();
-    
+
     _focusNode = FocusNode();
     // Request focus for keyboard events
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -123,18 +109,16 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(oldWidget);
     if (widget.showGuides != oldWidget.showGuides ||
         widget.debugOnly != oldWidget.debugOnly) {
-      _showGuides = widget.debugOnly
-          ? kDebugMode && widget.showGuides
-          : widget.showGuides;
-      _showGuides
-          ? _animationController.forward()
-          : _animationController.reverse();
+      setState(() {
+        _showGuides = widget.debugOnly
+            ? kDebugMode && widget.showGuides
+            : widget.showGuides;
+      });
     }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
     _focusNode.dispose();
     super.dispose();
   }
@@ -154,11 +138,6 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
                 requiredKeys.every((key) => pressedKeys.contains(key))) {
               setState(() {
                 _showGuides = !_showGuides;
-                if (_showGuides) {
-                  _animationController.forward();
-                } else {
-                  _animationController.reverse();
-                }
               });
               return KeyEventResult.handled;
             }
@@ -220,21 +199,7 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
               });
               return KeyEventResult.handled;
             }
-            
-            // Opacity controls (Ctrl + Up/Down)
-            if (isCtrlPressed && event.logicalKey == LogicalKeyboardKey.arrowUp) {
-              setState(() {
-                _currentOpacity = (_currentOpacity + 0.1).clamp(0.1, 1.0);
-              });
-              return KeyEventResult.handled;
-            }
-            if (isCtrlPressed && event.logicalKey == LogicalKeyboardKey.arrowDown) {
-              setState(() {
-                _currentOpacity = (_currentOpacity - 0.1).clamp(0.1, 1.0);
-              });
-              return KeyEventResult.handled;
-            }
-            
+
             // Preset switching (1, 2, 3, 0 keys)
             if (event.logicalKey == LogicalKeyboardKey.digit1) {
               setState(() {
@@ -266,7 +231,6 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
               setState(() {
                 _currentHorizontalSpacing = widget.horizontalSpacing;
                 _currentVerticalSpacing = widget.verticalSpacing;
-                _currentOpacity = 1.0;
                 _currentPreset = widget.preset;
                 _currentLineColor = widget.lineColor;
               });
@@ -280,35 +244,27 @@ class DevGridState extends State<DevGrid> with SingleTickerProviderStateMixin {
         children: [
           // Child widget (e.g., MaterialApp or Scaffold)
           widget.child,
-          // Animated grid overlay
-          AnimatedBuilder(
-            animation: _opacityAnimation,
-            builder: (context, child) {
-              return AnimatedOpacity(
-                opacity: _showGuides ? _opacityAnimation.value : 0.0,
-                duration: const Duration(milliseconds: 300),
-                child: IgnorePointer(
-                  child: CustomPaint(
-                    painter: LayoutGuidePainter(
-                      horizontalSpacing: _currentHorizontalSpacing,
-                      verticalSpacing: _currentVerticalSpacing,
-                      lineColor: _currentLineColor.withValues(alpha: (_currentLineColor.a * _currentOpacity)),
-                      lineThickness: widget.lineThickness,
-                      columnCount: widget.columnCount,
-                      rowCount: widget.rowCount,
-                      preset: _currentPreset,
-                      showSafeArea: widget.showSafeArea,
-                      marginWidth: widget.marginWidth,
-                      showRuler: widget.showRuler,
-                      breakpoints: widget.breakpoints,
-                      context: context,
-                    ),
-                    size: Size.infinite,
-                  ),
+          // Grid overlay
+          if (_showGuides)
+            IgnorePointer(
+              child: CustomPaint(
+                painter: LayoutGuidePainter(
+                  horizontalSpacing: _currentHorizontalSpacing,
+                  verticalSpacing: _currentVerticalSpacing,
+                  lineColor: _currentLineColor,
+                  lineThickness: widget.lineThickness,
+                  columnCount: widget.columnCount,
+                  rowCount: widget.rowCount,
+                  preset: _currentPreset,
+                  showSafeArea: widget.showSafeArea,
+                  marginWidth: widget.marginWidth,
+                  showRuler: widget.showRuler,
+                  breakpoints: widget.breakpoints,
+                  context: context,
                 ),
-              );
-            },
-          ),
+                size: Size.infinite,
+              ),
+            ),
         ],
       ),
     );
