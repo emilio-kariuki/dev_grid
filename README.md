@@ -7,17 +7,17 @@ A Flutter package that overlays your app with Figma-like grid guides for precise
 
 ## Features
 
-✨ **Figma-like Grid Overlay** - Visual grid guides similar to design tools  
-🎯 **Precise Layout Debugging** - Align widgets with pixel-perfect accuracy  
-🎨 **Customizable Appearance** - Adjust colors, thickness, and spacing  
-📐 **Multiple Grid Types** - Fixed spacing, column/row counts, or design presets  
-⌨️ **Keyboard Toggle** - Quick show/hide with customizable key combinations  
-🔧 **Design System Presets** - Built-in Figma 8pt, Bootstrap 12-column, Material 16dp grids  
-📱 **Safe Area Visualization** - Show device safe areas and margins  
-📏 **Ruler Markings** - Optional measurement guides along edges  
-📊 **Responsive Breakpoints** - Visualize breakpoint boundaries  
-🎭 **Debug Mode Only** - Automatically hidden in production builds  
-⚡ **Smooth Animations** - Elegant fade in/out transitions  
+✨ **Figma-like Grid Overlay** - Visual grid guides similar to design tools
+🎯 **Precise Layout Debugging** - Align widgets with pixel-perfect accuracy
+🎨 **Customizable Appearance** - Adjust colors, thickness, and spacing
+📐 **Multiple Grid Types** - Fixed spacing, column/row counts, or design presets
+⌨️ **Keyboard Controls** - Quick toggle and real-time grid adjustments
+🔧 **Design System Presets** - Built-in Figma 8pt, Bootstrap 12-column, Material 16dp grids
+📱 **Safe Area Visualization** - Show device safe areas and margins
+📏 **Ruler Markings** - Optional measurement guides along edges
+📊 **Responsive Breakpoints** - Visualize breakpoint boundaries
+🎭 **Debug Mode Only** - Automatically hidden in production builds
+⚡ **Lightweight & Fast** - Simple, performant implementation with instant toggling  
 
 ## Installation
 
@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  dev_grid: ^0.0.2
+  dev_grid: ^0.0.3
 ```
 
 Then run:
@@ -176,8 +176,9 @@ DevGrid(
 
 ## Keyboard Shortcuts
 
-You can enable keyboard shortcuts to quickly toggle the grid:
+DevGrid supports powerful keyboard shortcuts for quick grid manipulation:
 
+### Toggle Grid Visibility
 ```dart
 DevGrid(
   toggleKeySet: LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyG),
@@ -185,10 +186,19 @@ DevGrid(
 )
 ```
 
-Common key combinations:
+Common toggle combinations:
 - **Ctrl+G** (Windows/Linux)
 - **Cmd+G** (macOS)
 - **Alt+G** (Alternative)
+
+### Real-time Grid Adjustments
+When the grid is visible, use these shortcuts:
+- **+/-** - Adjust horizontal spacing
+- **Ctrl + +/-** - Adjust vertical spacing
+- **Arrow Keys** - Fine-tune spacing (0.5px increments)
+- **1/2/3** - Switch presets (Figma 8pt/Bootstrap 12/Material 16dp)
+- **0** - Custom grid mode
+- **R** - Reset all settings to defaults
 
 ## Best Practices
 
@@ -274,7 +284,8 @@ DevGrid(
 
 - **Zero Performance Impact in Release**: DevGrid is designed to have no impact on release builds when `debugOnly: true`
 - **Efficient Rendering**: Uses `CustomPaint` for optimal grid rendering performance
-- **Memory Efficient**: Minimal memory footprint with proper animation controller disposal
+- **Lightweight**: Simplified architecture with no animations for better performance
+- **Instant Toggling**: Grid visibility changes happen immediately without animation overhead
 
 ## Contributing
 
