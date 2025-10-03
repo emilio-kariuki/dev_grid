@@ -11,8 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DevGrid(
-      // Basic configuration
+    return MaterialApp(
+      title: 'DevGrid Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+      ),
+      home: DevGrid(
+        // Basic configuration
       showGuides: true,
       horizontalSpacing: 8.0,
       verticalSpacing: 8.0,
@@ -33,14 +39,7 @@ class MyApp extends StatelessWidget {
       // Responsive breakpoints
       breakpoints: const [600, 900, 1200],
       
-      child: MaterialApp(
-        title: 'DevGrid Example',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
-        ),
-        home: const ExampleHomePage(),
-      ),
+        child: const ExampleHomePage()),
     );
   }
 }
